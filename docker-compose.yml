@@ -1,0 +1,25 @@
+version: "3.5"
+
+services:
+  app:
+    image: louislam/uptime-kuma
+    environment:
+      - UPTIME_KUMA_HIDE_LOG=debug_monitor,info_monitor
+    restart: unless-stopped
+    volumes:
+      - app_data:/app/data
+    networks:
+      proxy_apps:
+    labels:
+      backups: "true"
+    dns:
+      - "1.1.1.1"
+      - "1.0.0.1"
+
+volumes:
+  app_data:
+
+networks:
+  proxy_apps:
+    name: proxy_apps
+    external: true
