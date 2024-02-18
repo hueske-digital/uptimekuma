@@ -7,12 +7,9 @@ services:
       - UPTIME_KUMA_HIDE_LOG=debug_monitor,info_monitor
     restart: unless-stopped
     volumes:
-      - app_data:/app/datass
+      - app_data:/app/data
     networks:
       proxy_apps:
-    dns:
-      - "1.1.1.1"
-      - "1.0.0.1"
     labels:
       backups: "true"
 
