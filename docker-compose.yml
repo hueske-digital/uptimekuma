@@ -1,4 +1,4 @@
-version: "3.5"
+version: "3.8"
 
 services:
   app:
@@ -7,7 +7,7 @@ services:
       - UPTIME_KUMA_HIDE_LOG=debug_monitor,info_monitor
     restart: unless-stopped
     volumes:
-      - app_data:/app/data
+      - app_data:/app/datass
     networks:
       proxy_apps:
     dns:
