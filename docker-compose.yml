@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   app:
     image: louislam/uptime-kuma:1
