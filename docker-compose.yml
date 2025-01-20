@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   app:
-    image: louislam/uptime-kuma
+    image: louislam/uptime-kuma:1
     environment:
       - UPTIME_KUMA_HIDE_LOG=debug_monitor,info_monitor
     restart: unless-stopped
