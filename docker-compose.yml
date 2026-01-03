@@ -1,8 +1,12 @@
 services:
   app:
-    image: louislam/uptime-kuma:1
+    image: louislam/uptime-kuma:2-slim
     environment:
       - UPTIME_KUMA_HIDE_LOG=debug_monitor,info_monitor
+      - CADDY_DOMAIN=${CADDY_DOMAIN}
+      - CADDY_TYPE=${CADDY_TYPE:-external}
+      - CADDY_PORT=${CADDY_PORT:-3001}
+      - CADDY_TLS=${CADDY_TLS:-true}
     restart: unless-stopped
     volumes:
       - app_data:/app/data
@@ -12,12 +16,10 @@ services:
       - "ofelia.job-exec.${COMPOSE_PROJECT_NAME}dbbackup.schedule=${BACKUP_CRON_SCHEDULE:-0 0 3 * * *}"
       - "ofelia.job-exec.${COMPOSE_PROJECT_NAME}dbbackup.command=sh -c 'sqlite3 /app/data/kuma.db \".backup /app/data/kuma.db.backup\"'"
     networks:
-      proxy_apps:
+      - caddy
 
 volumes:
   app_data:
 
 networks:
-  proxy_apps:
-    name: proxy_apps
-    external: true
+  caddy:
